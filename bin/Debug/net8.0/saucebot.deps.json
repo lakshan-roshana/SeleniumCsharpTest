@@ -1,0 +1,67 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "saucebot/1.0.0": {
+        "dependencies": {
+          "Selenium.WebDriver": "4.39.0",
+          "Selenium.WebDriver.ChromeDriver": "143.0.7499.4200"
+        },
+        "runtime": {
+          "saucebot.dll": {}
+        }
+      },
+      "Selenium.WebDriver/4.39.0": {
+        "runtime": {
+          "lib/net8.0/WebDriver.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux/native/selenium-manager": {
+            "rid": "linux",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/selenium-manager": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/native/selenium-manager.exe": {
+            "rid": "win",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Selenium.WebDriver.ChromeDriver/143.0.7499.4200": {}
+    }
+  },
+  "libraries": {
+    "saucebot/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Selenium.WebDriver/4.39.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LbiWOVW/PA/YVHKAXxMPLwwoupj3XLWKwjnGNkGFF0dG0rX2MJHDWgSf9WPSRWb9Msr3vTWFg0EsEAdNs68NiA==",
+      "path": "selenium.webdriver/4.39.0",
+      "hashPath": "selenium.webdriver.4.39.0.nupkg.sha512"
+    },
+    "Selenium.WebDriver.ChromeDriver/143.0.7499.4200": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Jg7f723BWugjd6ZM/GsFKgFXSI14DklkURJx6WJGrP8j6pA2nXlwjHs7PN8vOex2qK4fmlShRsvDL6iC1Q8Kqg==",
+      "path": "selenium.webdriver.chromedriver/143.0.7499.4200",
+      "hashPath": "selenium.webdriver.chromedriver.143.0.7499.4200.nupkg.sha512"
+    }
+  }
+}

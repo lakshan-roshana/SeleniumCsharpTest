@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "3F3bWYWPNX0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lakshan roshana\\Desktop\\SeleniumTest\\saucebot\\saucebot.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lakshan roshana\\.nuget\\packages\\selenium.webdriver\\4.39.0\\selenium.webdriver.4.39.0.nupkg.sha512",
+    "C:\\Users\\lakshan roshana\\.nuget\\packages\\selenium.webdriver.chromedriver\\143.0.7499.4200\\selenium.webdriver.chromedriver.143.0.7499.4200.nupkg.sha512"
+  ],
+  "logs": []
+}
