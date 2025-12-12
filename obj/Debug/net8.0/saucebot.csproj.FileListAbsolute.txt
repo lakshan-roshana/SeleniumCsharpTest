@@ -18,3 +18,4 @@ C:\Users\lakshan roshana\Desktop\SeleniumTest\saucebot\obj\Debug\net8.0\refint\s
 C:\Users\lakshan roshana\Desktop\SeleniumTest\saucebot\obj\Debug\net8.0\saucebot.pdb
 C:\Users\lakshan roshana\Desktop\SeleniumTest\saucebot\obj\Debug\net8.0\saucebot.genruntimeconfig.cache
 C:\Users\lakshan roshana\Desktop\SeleniumTest\saucebot\obj\Debug\net8.0\ref\saucebot.dll
+C:\Users\lakshan roshana\Desktop\SeleniumTest\saucebot\obj\Debug\net8.0\saucebot.sourcelink.json

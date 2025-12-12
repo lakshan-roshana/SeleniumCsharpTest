@@ -102,6 +102,33 @@ namespace SauceBot
                 Console.WriteLine("❌ CART CHECK FAILED: Cart badge did not appear.");
             }
 
+            Console.WriteLine("Logging out...");
+
+            // 1. Click the Burger Menu Button
+            // (If "react-burger-menu-btn" doesn't work, try "menu_button_container"!)
+            IWebElement menuButton = driver.FindElement(By.Id("react-burger-menu-btn"));
+            menuButton.Click();
+
+            // 2. IMPORTANT: Wait for the menu animation!
+            // The menu takes about 0.5 seconds to slide out. If we don't wait, 
+            // the bot tries to click "Logout" before it is visible and crashes.
+            Thread.Sleep(1000); 
+
+            // 3. Find and Click the Logout Link
+            // (The ID for the link inside the menu is "logout_sidebar_link")
+            IWebElement logoutLink = driver.FindElement(By.Id("logout_sidebar_link"));
+            logoutLink.Click();
+
+            // 4. Verification: Check if we are back at the login screen
+            if (driver.Url == "https://www.saucedemo.com/")
+            {
+                Console.WriteLine("✅ LOGOUT SUCCESSFUL: We are back at the login screen.");
+            }
+            else
+            {
+                Console.WriteLine("❌ LOGOUT FAILED: URL is " + driver.Url);
+            }
+
             // 8. CLEANUP: Close the browser
             // Always do this, or you will have 50 Chrome windows open!
             driver.Quit();
