@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
 
@@ -15,6 +16,9 @@ namespace SauceBot
             // This creates a "Driver" object that controls the browser
             IWebDriver driver = new ChromeDriver();
 
+            // Create a "Waiter" that waits up to 10 seconds max
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
             // 2. NAVIGATE: Go to the SauceDemo website
             driver.Navigate().GoToUrl("https://www.saucedemo.com/");
             
@@ -25,7 +29,7 @@ namespace SauceBot
             // 3. INTERACT: Find the Username box and type 'problem_user'
             // We use By.Id because the developer gave this element an ID of "user-name"
             IWebElement usernameField = driver.FindElement(By.Id("user-name"));
-            usernameField.SendKeys("standard_user");
+            usernameField.SendKeys("problem_user");
 
             // 4. INTERACT: Find the Password box and type 'secret_sauce'
             IWebElement passwordField = driver.FindElement(By.Id("password"));
@@ -37,7 +41,8 @@ namespace SauceBot
             Console.WriteLine("Clicked Login...");
 
             // 6. WAIT: Pause for 3 seconds to let the page load (Simple method)
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
+            wait.Until(d => d.Url.Contains("inventory"));
 
             // 7. VERIFY: Check if the login worked by looking at the URL
             string currentUrl = driver.Url;
@@ -79,7 +84,8 @@ namespace SauceBot
             addToCartBtn.Click();
             
             // 2. Wait a moment for the animation
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
+            wait.Until(d => d.FindElement(By.ClassName("shopping_cart_badge")));
 
             // 3. Verify the Cart Badge "1" appeared
             // The red bubble has the class "shopping_cart_badge"
@@ -104,33 +110,35 @@ namespace SauceBot
 
             Console.WriteLine("Logging out...");
 
-            // 1. Click the Burger Menu Button
-            // (If "react-burger-menu-btn" doesn't work, try "menu_button_container"!)
-            IWebElement menuButton = driver.FindElement(By.Id("react-burger-menu-btn"));
-            menuButton.Click();
+            // 1. Click the Menu
+            driver.FindElement(By.Id("react-burger-menu-btn")).Click();
 
-            // 2. IMPORTANT: Wait for the menu animation!
-            // The menu takes about 0.5 seconds to slide out. If we don't wait, 
-            // the bot tries to click "Logout" before it is visible and crashes.
+            // 2. Wait for animation (Crucial for sliding menus)
             Thread.Sleep(1000); 
 
-            // 3. Find and Click the Logout Link
-            // (The ID for the link inside the menu is "logout_sidebar_link")
+            // 3. Find the Link
             IWebElement logoutLink = driver.FindElement(By.Id("logout_sidebar_link"));
-            logoutLink.Click();
 
-            // 4. Verification: Check if we are back at the login screen
-            if (driver.Url == "https://www.saucedemo.com/")
+            // --- THE FIX: FORCE CLICK (JavaScript) ---
+            // This bypasses the UI and forces the browser to trigger the click event.
+            // It works even if the menu is slightly stuck or moving.
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].click();", logoutLink);
+            // -----------------------------------------
+
+            // 5. Wait for URL to change (Smart Wait)
+            try 
             {
+                // Wait until we are NO LONGER on the inventory page
+                wait.Until(d => !d.Url.Contains("inventory")); 
                 Console.WriteLine("✅ LOGOUT SUCCESSFUL: We are back at the login screen.");
             }
-            else
+            catch (WebDriverTimeoutException)
             {
-                Console.WriteLine("❌ LOGOUT FAILED: URL is " + driver.Url);
+                Console.WriteLine("❌ LOGOUT FAILED: URL never changed. Current: " + driver.Url);
             }
-
+            
             // 8. CLEANUP: Close the browser
-            // Always do this, or you will have 50 Chrome windows open!
             driver.Quit();
         }
     }
