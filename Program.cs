@@ -141,7 +141,6 @@ namespace SauceBot
             // It works even if the menu is slightly stuck or moving.
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click();", logoutLink);
-            // -----------------------------------------
 
             // 5. Wait for URL to change (Smart Wait)
             try 
